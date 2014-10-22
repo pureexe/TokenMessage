@@ -38,7 +38,7 @@
 				tokenList.forEach(function(q){
 					FB.setAccessToken(q);
 					FB.api('/me',function(res){
-						$("#token_table").append("<tr><td><img src='https://graph.facebook.com/"+res.id+"/picture' class='img-responsive'></img> "+res.name+"</td></tr>");
+						$("#token_table").append("<tr><td><a href='viewuser.html?token="+access_token+"'><img src='https://graph.facebook.com/"+res.id+"/picture' class='img-responsive'></img> "+res.name+"</a></td></tr>");
 					});
 				});
 			} else {
