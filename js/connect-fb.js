@@ -7,6 +7,7 @@ function Facebook(){
 	this.api = function(cmd,way,callback){
 		if(typeof callback === "undefined"){
 			this.api(cmd,'GET',way);
+			return ;
 		}
 		console.log("https://graph.facebook.com/"+this.apiVersion+cmd+seperate+"access_token="+this.getAccessToken());
 		var seperate = (cmd.indexOf("?") > -1)?"&":"?";
