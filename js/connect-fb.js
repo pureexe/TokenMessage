@@ -15,7 +15,7 @@ function Facebook(){
 			type: way,
 			success: function(result) {
 				callback(result);
-			}
+			},
 			error: function(jqXHR,data, errorThrown) {
 				var err ={"error":data};
 				callback(err);
