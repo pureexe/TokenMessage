@@ -29,6 +29,7 @@
 				} else {
 					tokenList.push(access_token);
 					localStorage.TokenList = JSON.stringify(tokenList);
+					 window.location.assign("viewuser.html?token="+access_token);
 				}
 			});
 		}
