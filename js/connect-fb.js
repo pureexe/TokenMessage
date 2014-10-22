@@ -14,6 +14,8 @@ function Facebook(){
 			url: "https://graph.facebook.com/"+this.apiVersion+cmd+seperate+"access_token="+this.getAccessToken(),
 			type: way,
 			success: function(result) {
+				var res = this.url.split("access_token=");
+				result.access_token = res[1];
 				callback(result);
 			},
 			error: function(jqXHR,data, errorThrown) {
