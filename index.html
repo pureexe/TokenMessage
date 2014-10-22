@@ -12,8 +12,8 @@
 			var TokenList = JSON.parse(localStorage.TokenList);
 			
 		} else {
-			$("#token_table").html("<tr><td colspan='2'>Not have any access token</td></tr>");
-			console.log('run');
+			$(function(){$("#token_table").html("<tr><td colspan='2'>Not have any access token</td></tr>")});
+
 		}
 	</script>
 	</head>
