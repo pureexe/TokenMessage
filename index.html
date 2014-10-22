@@ -8,7 +8,12 @@
 	<script src="connect-fb.js"></script>
 	<script language="javascript">
 		var FB = new Facebook();
-		
+		if(localStorage.TokenList&&JSON.parse(localStorage.TokenList).length>0){
+			var TokenList = JSON.parse(localStorage.TokenList);
+			
+		} else {
+			$("#token_table").html("<tr><td colspan='2'>Not have any access token</td></tr>");
+		}
 	</script>
 </head>
 <body>
@@ -21,11 +26,10 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="?main"><i class="fa fa-comments-o fa-lg"></i>Token Message<span></a>
+      <a class="navbar-brand" href="?main"><i class="fa fa-comments-o fa-lg"></i> Token Message<span></a>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
 	</div>
 	</div>
  </nav>
@@ -44,7 +48,7 @@
         <div class="col-md-6">
             <table class="table table-hover col-md-6" id = "token_table">
             <thead><th>Avaliable Access token <a id='trashbutton' href="javascript:display_token_delete()"><i class="fa fa-trash"></i></a></th></thead>
-				<tr><td colspan='2'>Not have any access token</td></tr>
+					<tr><td><i class="fa fa-refresh fa-spin"></i></td></tr>
             </table>
         </div>
 </div>
