@@ -3,18 +3,49 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<script src="js/connect-fb.js"></script>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-	<script src="connect-fb.js"></script>
-		<script language="javascript">
+	<script src="js/bootstrap-growl.min.js"></script>
+	<script language="javascript">
 		var FB = new Facebook();
-		if(localStorage.TokenList&&JSON.parse(localStorage.TokenList).length>0){
-			var TokenList = JSON.parse(localStorage.TokenList);
-			
-		} else {
-			$(function(){$("#token_table").html("<tr><td colspan='2'>Not have any access token</td></tr>")});
-
+		var tokenList;
+		function loadaccessToken(){
+			var access_token = $("access_token").val();
+			FB.setAccessToken(access_token);
+			FB.api("/me",function(res){
+				if(res.error){
+					$.growl({
+						message: 'Access token expire!'
+					},{
+						type: 'danger',
+						mouse_over: "pause",
+						placement: {
+							from: "top",
+							align: "center"
+						},
+						allow_dismiss: false,
+					})
+				} else {
+					tokenList.push(access_token);
+					localStorage.TokenList = JSON.stringify(tokenList);
+				}
+			});
 		}
+		function pagemain(){
+			if(localStorage.TokenList&&JSON.parse(localStorage.TokenList).length>0){
+				tokenList = JSON.parse(localStorage.TokenList);	
+				tokenList.forEach(function(q){
+					FB.setAccessToken(q);
+					FB.api('/me',function(res){
+						$("#token_table").append("<tr><td>"+res.name+"</td></tr>");
+					});
+				});
+			} else {
+				$(function(){$("#token_table").html("<tr><td colspan='2'>Not have any access token</td></tr>")});
+			}
+		}
+		pagemain();
 	</script>
 	</head>
 <body>
@@ -41,10 +72,10 @@
 				<h2 class="form-signin-heading">Please sign in with access token.</h2>
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-user"></i></span>
-						<input type="text" class="form-control" placeholder="Access Token" name="access_token">
+						<input type="text" class="form-control" placeholder="Access Token" name="access_token" id="access_token">
 					</div>
 					<br/>
-					<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+					<a class="btn btn-lg btn-primary btn-block" type="submit" href="javascript:loadaccessToken()">Sign in</a>
 			</form>
 		</div>
         <div class="col-md-6">
