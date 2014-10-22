@@ -32,7 +32,6 @@
 				alert("finish");
 				return ;
 			}
-			$('#user-display tr:last').remove();
 			$("#user-display").append("<tr id='loading-spin'><td></td><td><center><i class='fa fa-refresh fa-spin'></i></center></td><td></td></tr>");
 			until = (until)?until:"";
 			FB.api("/me/inbox?fields=id,to&until="+until,function(res){
@@ -59,6 +58,9 @@
 				})
 				txt+="<tr id='loadmore-txt'><td></td><td><a href='javascript:action_loadmore_user("+getURL("until",res.paging.next)+")'>Load more</a></td><td></td></tr></tr>";
 				$("#loading-spin").remove();
+				if(until!=0){
+					$('#user-display tr:last').remove();
+				}
 				$("#user-display").append(txt);
 			});
 		}
