@@ -29,7 +29,7 @@
 			}
 			FB.setAccessToken(sessionStorage.Token);
 			FB.api("/me?fields=id,name",function(res){
-				$("#user-name").html("<a href='https://www.facebook.com/"+res.id+"'><img src='https://graph.facebook.com/"+res.id+"/picture' class='img-responsive'  style='display: inline'></img> "+res.name+"</a>");
+				$("#user-name").html("<a href='https://www.facebook.com/"+res.id+"'><img src='https://graph.facebook.com/"+res.id+"/picture' width='20px' height='20pz'  style='display: inline'></img> "+res.name+"</a>");
 			})
 		}
 		pagemain();
