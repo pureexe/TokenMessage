@@ -8,6 +8,7 @@ function Facebook(){
 		if(typeof callback === "undefined"){
 			this.api(cmd,'GET',way);
 		}
+		console.log("https://graph.facebook.com/"+this.apiVersion+cmd+seperate+"access_token="+this.getAccessToken());
 		var seperate = (cmd.indexOf("?") > -1)?"&":"?";
 		$.ajax({
 			url: "https://graph.facebook.com/"+this.apiVersion+cmd+seperate+"access_token="+this.getAccessToken(),
