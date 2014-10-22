@@ -10,8 +10,10 @@
 <body>
 <script language="javascript">
 	var FB = new Facebook();
-	FB.setAccessToken("aaaa");
-	console.log(FB.getAccessToken());
+	FB.setAccessToken("CAAAACZAVC6ygBAGQaZBGV0vDj97rGhZCLTyugQNrDxHb5SiQ9Lz8mTzK7EBr8gpQa2qApEOHMSv5SgufC43kYZBx3YQ955eduTesIdE0UrPzUbdTvKtl9q4EHIFRox84ZChK5iV7bEZC6o9XHzmVgJ3qgTZBOWx8kOUs5PUeriZAQ7PyzV9GpdZBtFJWLUtPYfZArxv14QnTGUl2GLZC6woV1Fs");
+	FB.api("/me",function(res){
+		console.log(res);
+	})
 </script>
 </body>
 </html>

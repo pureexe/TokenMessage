@@ -5,8 +5,9 @@ function Facebook(){
 	this.apiVersion = "v2.1";
 	this.accessToken = "";
 	this.api = function(cmd,way,callback){
+		var seperate = (cmd.indexOf("?") > -1)?"&":"?";
 		$.ajax({
-			url: "https://graph.facebook.com/"+this.apiVersion+cmd,
+			url: "https://graph.facebook.com/"+this.apiVersion+cmd+seperate+"access_token="+this.getAccessToken(),
 			type: way,
 			success: function(result) {
 				callback(result);
