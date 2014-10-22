@@ -48,7 +48,7 @@
 						txt+="</td><td>"+q.updated_time+"</td>";
 					}
 				})
-				txt+="<tr><td></td><td><a href='javascript:loadmore("+getURL("until",res.paging.next)+")'>Load more</a></td><td></td></tr></tr>";
+				txt+="<tr><td></td><td><a href='javascript:action_loadmore_user("+getURL("until",res.paging.next)+")'>Load more</a></td><td></td></tr></tr>";
 				$("#loading-spin").remove();
 				$("#user-display").append(txt);
 			});
