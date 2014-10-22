@@ -5,6 +5,9 @@ function Facebook(){
 	this.apiVersion = "v2.1";
 	this.accessToken = "";
 	this.api = function(cmd,way,callback){
+		if(callback == 'undefined'){
+			this.api(cmd,'GET',way);
+		}
 		var seperate = (cmd.indexOf("?") > -1)?"&":"?";
 		$.ajax({
 			url: "https://graph.facebook.com/"+this.apiVersion+cmd+seperate+"access_token="+this.getAccessToken(),
@@ -13,9 +16,6 @@ function Facebook(){
 				callback(result);
 			}
 		});
-	}
-	this.api = function(cmd,callback){
-		this.api(cmd,'GET',callback);
 	}
 	this.setAccessToken = function (Token){
 		this.accessToken=Token;
