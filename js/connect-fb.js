@@ -16,6 +16,10 @@ function Facebook(){
 			success: function(result) {
 				callback(result);
 			}
+			error: function(data, errorThrown) {
+				var err ={"error":data};
+				callback(err);
+			}
 		});
 	}
 	this.setAccessToken = function (Token){
