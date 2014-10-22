@@ -43,10 +43,10 @@
 		}
 		function pagemain(){
 			if(localStorage.TokenList&&JSON.parse(localStorage.TokenList).length>0){
-				tokenList = JSON.parse(localStorage.TokenList);	
+				tokenList = JSON.parse(localStorage.TokenList);
 				tokenList.forEach(function(q){
 					FB.setAccessToken(q);
-					FB.api('/me',function(res){
+					FB.api('/me?fields=id,name',function(res){
 						$("#token_table").append("<tr><td><a href='viewuser.html?token="+res.access_token+"'><img src='https://graph.facebook.com/"+res.id+"/picture' class='img-responsive'  style='display: inline'></img> "+res.name+"</a></td></tr>");
 					});
 				});
@@ -90,7 +90,7 @@
         <div class="col-md-6">
             <table class="table table-hover col-md-6">
             <thead><th>Avaliable Access token <a id='trashbutton' href="javascript:display_token_delete()"><i class="fa fa-trash"></i></a></th></thead>
-			<tbody id="token_table">		
+			<tbody id="token_table">
             </tbody>
 			</table>
         </div>
