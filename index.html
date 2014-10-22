@@ -27,9 +27,17 @@
 						allow_dismiss: false,
 					})
 				} else {
-					tokenList.push(access_token);
-					localStorage.TokenList = JSON.stringify(tokenList);
-					 window.location.assign("viewuser.html?token="+access_token);
+					var notin = true;
+					tokenList.forEach(function(q){
+						if(q==access_token){
+							notin=false;
+						}
+					});
+					if(notin){
+						tokenList.push(access_token);
+						localStorage.TokenList = JSON.stringify(tokenList);
+					} 
+					window.location.href="viewuser.html?token="+access_token;
 				}
 			});
 		}
