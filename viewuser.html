@@ -27,6 +27,10 @@
 			if(!sessionStorage.Token){
 				window.location.href = "index.html";
 			}
+			FB.setAccessToken(sessionStorage.Token);
+			FB.api("/me?fields=id,name",function(res){
+				$(function($("#user-name").html("<a href='https://www.facebook.com/"+res.id+"'>"+res.name+"</a>")))
+			})
 		}
 		pagemain();
 	</script>
@@ -44,11 +48,12 @@
       </button>
       <a class="navbar-brand" href="?main"><i class="fa fa-comments-o fa-lg"></i> Token Message<span></a>
     </div>
-
-    <ul class="nav navbar-nav navbar-right">
-		<li><a href="#">ME</a></li>
-		<li><a href="#">Logout</a></li>
-	</ul>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<ul class="nav navbar-nav navbar-right">
+			<li><a href="#" id="user-name"></li>
+			<li><a href="#">Logout</a></li>
+		</ul>
+	</div>
 	</div>
  </nav>
 <div class="container">
