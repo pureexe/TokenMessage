@@ -53,7 +53,8 @@
 						txt+="</td><td>"+q.updated_time+"</td>";
 					}
 				})
-				if(res.paging.next){
+				console.log(res.paging);
+				if(typeof res.paging.next  !== 'undefined'){
 					txt+="<tr id='loadmore-txt'><td></td><td><a href=\"javascript:action_loadmore_user('"+getURL("until",res.paging.next)+"&__paging_token="+getURL("__paging_token",res.paging.next)+"')\">Load more</a></td><td></td></tr></tr>";
 				} else {
 					$.growl({
