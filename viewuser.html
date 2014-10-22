@@ -9,6 +9,7 @@
 	<script src="js/bootstrap-growl.min.js"></script>
 	<script language="javascript">
 		var FB = new Facebook();
+		var user_id = "";
 		function getURL(name, url) {
             if (!url) {
                 url = window.location.href;
@@ -19,6 +20,13 @@
             }
             return results[1] || 0;
         }
+		function action_loadmore_user(until){
+			$("#user-display").append("<tr id='loading-spin'><td></td><td><center><i class='fa fa-refresh fa-spin'></i></center></td><td></td></tr>");
+			until = (until)?until:"";
+			FB.api("/me/inbox?until="+until,function(res){
+				console.log(res);
+			});
+		}
 		function pagemain(){
 			var token = getURL("token");
 			if(token){
@@ -29,9 +37,10 @@
 			}
 			FB.setAccessToken(sessionStorage.Token);
 			FB.api("/me?fields=id,name",function(res){
-				$("#user-name").html("<a href='https://www.facebook.com/"+res.id+"'><img src='https://graph.facebook.com/"+res.id+"/picture' width='20px' height='20pz'  style='display: inline'></img> "+res.name+"</a>");
+				user_id=res.id;
+				$("#user-name").html("<a href='https://www.facebook.com/"+res.id+"'><img src='https://graph.facebook.com/"+res.id+"/picture' width='20px' height='20pz'  style='display: inline'></img> "+res.name+"</a>");				
 			})
-			
+			action_loadmore_user();
 		}
 		pagemain();
 	</script>
@@ -61,12 +70,11 @@
 		<table>
 			<table class="table table-hover col-md-6">
 				<thead>
-					<th class="md-1">Picture</th>
-					<th class="md-9">Contact</th>
-					<th class="md-2">Date</th>
+					<th class="col-md-1">Picture</th>
+					<th class="col-md-9">Contact</th>
+					<th class="col-md-2">Date</th>
 				</thead>
-				<tbody id="token_table">
-					<tr><td colspan='3'><center><i class="fa fa-refresh fa-spin"></i></center></td></tr>
+				<tbody id="user-display">
 				</tbody>
 			</table>
 		</table>
