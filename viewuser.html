@@ -28,20 +28,6 @@
 		var old_until=-1;
 		function action_loadmore_user(until){
 			$("#loadmore-txt").remove();
-			if(old_until==until){
-				$.growl({
-					message: '<b>All</b> chat have been loaded!'
-				},{
-					type: 'info',
-					mouse_over: "pause",
-					placement: {
-						from: "top",
-						align: "center"
-					},
-					allow_dismiss: false,
-				})
-				return ;
-			}
 			old_until=until;
 			$("#user-display").append("<tr id='loading-spin'><td></td><td><center><i class='fa fa-refresh fa-spin'></i></center></td><td></td></tr>");
 			until = (until)?until:"";
@@ -67,7 +53,21 @@
 						txt+="</td><td>"+q.updated_time+"</td>";
 					}
 				})
-				txt+="<tr id='loadmore-txt'><td></td><td><a href=\"javascript:action_loadmore_user('"+getURL("until",res.paging.next)+"&__paging_token="+getURL("__paging_token",res.paging.next)+"')\">Load more</a></td><td></td></tr></tr>";
+				if(res.paging.next){
+					txt+="<tr id='loadmore-txt'><td></td><td><a href=\"javascript:action_loadmore_user('"+getURL("until",res.paging.next)+"&__paging_token="+getURL("__paging_token",res.paging.next)+"')\">Load more</a></td><td></td></tr></tr>";
+				} else {
+					$.growl({
+						message: '<b>All</b> chat have been loaded!'
+					},{
+						type: 'info',
+						mouse_over: "pause",
+						placement: {
+							from: "top",
+							align: "center"
+						},
+						allow_dismiss: false,
+					})
+				}
 				$("#loading-spin").remove();
 				$("#user-display").append(txt);
 			});
