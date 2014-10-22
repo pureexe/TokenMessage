@@ -35,9 +35,9 @@
 							txt+="<tr><td><img src='https://graph.facebook.com/"+q.to.data[1].id+"/picture' class='img-responsive'></td><td>"+q.to.data[1].name+"</td><td>"+q.updated_time+"</td>";						
 						}
 					}else {
-						txt+="<tr><td><i class='fa fa-users fa-2x'></i></td><td>
+						txt+="<tr><td><i class='fa fa-users fa-2x'></i></td><td>";
 						q.to.data.forEach(function(r){
-							txt+=r+", "
+							txt+=r+", ";
 						});
 						txt = txt.substring(0, str.length - 2);
 						txt+="</td><td>"+q.updated_time+"</td>";
