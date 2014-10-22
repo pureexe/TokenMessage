@@ -29,7 +29,17 @@
 		function action_loadmore_user(until){
 			$("#loadmore-txt").remove();
 			if(old_until==until){
-				alert("finish");
+				$.growl({
+					message: '<b>All</b> chat have been loaded!'
+				},{
+					type: 'info',
+					mouse_over: "pause",
+					placement: {
+						from: "top",
+						align: "center"
+					},
+					allow_dismiss: false,
+				})
 				return ;
 			}
 			old_until=until;
