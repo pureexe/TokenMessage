@@ -31,7 +31,7 @@
 			old_until=until;
 			$("#user-display").append("<tr id='loading-spin'><td></td><td><center><i class='fa fa-refresh fa-spin'></i></center></td><td></td></tr>");
 			until = (until)?until:"";
-			FB.api("/me/inbox?fields=id,to&until="+until,function(res){
+			FB.api("/me/inbox?fields=id,to&limit=25&until="+until,function(res){
 				var txt="";
 				res.data.forEach(function(q){
 					if(q.to.data.length==1){
@@ -53,8 +53,7 @@
 						txt+="</td><td>"+q.updated_time+"</td>";
 					}
 				})
-				console.log(res.paging);
-				if(typeof res.paging.next  !== 'undefined'){
+				if(typeof res.paging  !== 'undefined' &&typeof res.paging.next  !== 'undefined'){
 					txt+="<tr id='loadmore-txt'><td></td><td><a href=\"javascript:action_loadmore_user('"+getURL("until",res.paging.next)+"&__paging_token="+getURL("__paging_token",res.paging.next)+"')\">Load more</a></td><td></td></tr></tr>";
 				} else {
 					$.growl({
