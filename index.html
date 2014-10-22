@@ -11,7 +11,7 @@
 		var FB = new Facebook();
 		var tokenList;
 		function loadaccessToken(){
-			var access_token = $("access_token").val();
+			var access_token = $("#access_token").val();
 			FB.setAccessToken(access_token);
 			FB.api("/me",function(res){
 				if(res.error){
