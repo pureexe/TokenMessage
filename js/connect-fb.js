@@ -5,7 +5,7 @@ function Facebook(){
 	this.apiVersion = "v2.1";
 	this.accessToken = "";
 	this.api = function(cmd,way,callback){
-		if(typeof callback === 'undefined'){
+		if(typeof callback === "undefined"){
 			this.api(cmd,'GET',way);
 		}
 		var seperate = (cmd.indexOf("?") > -1)?"&":"?";
