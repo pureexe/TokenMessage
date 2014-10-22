@@ -6,17 +6,19 @@
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<script src="connect-fb.js"></script>
-</head>
-<body>
-	<script language="javascript">
+		<script language="javascript">
 		var FB = new Facebook();
 		if(localStorage.TokenList&&JSON.parse(localStorage.TokenList).length>0){
 			var TokenList = JSON.parse(localStorage.TokenList);
 			
 		} else {
 			$("#token_table").html("<tr><td colspan='2'>Not have any access token</td></tr>");
+			console.log('run');
 		}
 	</script>
+	</head>
+<body>
+
 <nav class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
