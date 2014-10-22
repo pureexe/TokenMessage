@@ -17,7 +17,7 @@ function Facebook(){
 				callback(result);
 			},
 			error: function(jqXHR,data, errorThrown) {
-				var err ={"error":data};
+				var err ={"error":errorThrown};
 				callback(err);
 			}
 		});
