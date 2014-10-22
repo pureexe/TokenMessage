@@ -3,6 +3,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/growl-animate.min.css">
 	<script src="js/connect-fb.js"></script>
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -72,6 +73,10 @@
 				$("#user-display").append(txt);
 			});
 		}
+		function logout(){
+			sessionStorage.removeItem("Token");
+			window.location.href = "index.html";
+		}
 		function pagemain(){
 			var token = getURL("token");
 			if(token){
@@ -82,8 +87,12 @@
 			}
 			FB.setAccessToken(sessionStorage.Token);
 			FB.api("/me?fields=id,name",function(res){
+				if(res.error){
+					window.location.href = "index.html?error=token+expire";
+				}else{
 				user_id=res.id;
 				$("#user-name").html("<a href='https://www.facebook.com/"+res.id+"'><img src='https://graph.facebook.com/"+res.id+"/picture' width='20px' height='20pz'  style='display: inline'></img> "+res.name+"</a>");				
+				}
 			})
 			action_loadmore_user();
 		}
@@ -106,7 +115,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav navbar-right">
 			<li id="user-name"></li>
-			<li><a href="#">Logout</a></li>
+			<li><a href="javascript:logout()">Logout</a></li>
 		</ul>
 	</div>
 	</div>
