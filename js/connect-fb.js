@@ -14,13 +14,7 @@ function Facebook(){
 		});
 	}
 	this.api = function(cmd,callback){
-		$.ajax({
-			url: "https://graph.facebook.com/"+this.apiVersion+cmd,
-			type: 'GET',
-			success: function(result) {
-				callback(result);
-			}
-		});
+		this.api(cmd,'GET',callback);
 	}
 	this.setAccessToken = function (Token){
 		this.accessToken=Token;
