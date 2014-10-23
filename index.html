@@ -49,13 +49,13 @@
 		}
 		function toggle_delete(){
 			if(!deleteMode){
-				token_deletemode = true; 
+				deleteMode = true; 
 				$(".tokenlink").css({'color':'#d9534f'});
 				$("#trashbutton").css({'color':'#d9534f'});
 				$("#trashbutton").addClass("fa-spin");
 				 $( ".tokenlink" ).parent().effect( "highlight","slow");
 			} else {
-				token_deletemode = false; 
+				deleteMode = false; 
 				$(".tokenlink").css({'color':'#428bca'});
 				$("#trashbutton").css({'color':'#428bca'});
 				$("#trashbutton").removeClass("fa-spin");
@@ -84,7 +84,7 @@
 					$(this).parent().parent().fadeOut(400, function() { 
 						$(this).remove(); 
 						if($('#token_table tr').length==1){
-							$('#token_table').append("<tr><td colspan='2'>Not have any access token</td></tr>");
+							$('#token_table').append("<tr><td>Not have any access token</td></tr>");
 						}
 					});
 				} else {
