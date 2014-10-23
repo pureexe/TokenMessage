@@ -49,7 +49,7 @@
 					})
 				}
 				res.data.forEach(function(q){
-					if(!q.message){
+					if(typeof q.message !== undefined){
 						txt+="<tr><td><img src='https://graph.facebook.com/"+q.from.id+"/picture'></img></td><td>"+q.message+"</td><td>"+q.created_time+"</td></tr>";
 					}else {
 						FB.fql("SELECT attachment FROM message WHERE message_id='"+q.id+"'",function(r){
