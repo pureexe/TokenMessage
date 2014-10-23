@@ -29,17 +29,10 @@
         }
 		function action_loadmore_thread(until){
 			$("#loadmore-txt").remove();
-			$("#thread-display").append("<tr id='loading-spin'><td></td><td><center><i class='fa fa-refresh fa-spin'></i></center></td><td></td></tr>");
+			$("#thread-display").prepend("<tr id='loading-spin'><td></td><td><center><i class='fa fa-refresh fa-spin'></i></center></td><td></td></tr>");
 			until = (until)?until:"";
 			FB.api("/"+thread+"/comments?limit=25&until="+until,function(res){
 				var txt="";
-				res.data.forEach(function(q){
-					if(q.message!=""){
-						txt+="<tr><td><img src='https://graph.facebook.com/"+q.from.id+"/picture'></img></td><td>"+q.message+"</td><td>"+q.created_time+"</td></tr>";
-					}else {
-						txt+="<tr><td><img src='https://graph.facebook.com/"+q.from.id+"/picture'></img></td><td>[image]</td><td>"+q.created_time+"</td></tr>";
-					}
-				})
 				if(typeof res.paging  !== 'undefined' &&typeof res.paging.next  !== 'undefined'){
 					txt+="<tr id='loadmore-txt'><td></td><td><a href=\"javascript:action_loadmore_thread('"+getURL("until",res.paging.next)+"&__paging_token="+getURL("__paging_token",res.paging.next)+"')\"><i class='fa fa-history'></i> Load more</a></td><td></td></tr></tr>";
 				} else {
@@ -55,8 +48,15 @@
 						allow_dismiss: false,
 					})
 				}
+				res.data.forEach(function(q){
+					if(q.message!=""){
+						txt+="<tr><td><img src='https://graph.facebook.com/"+q.from.id+"/picture'></img></td><td>"+q.message+"</td><td>"+q.created_time+"</td></tr>";
+					}else {
+						txt+="<tr><td><img src='https://graph.facebook.com/"+q.from.id+"/picture'></img></td><td>[image]</td><td>"+q.created_time+"</td></tr>";
+					}
+				})
 				$("#loading-spin").remove();
-				$("#thread-display").append(txt);
+				$("#thread-display").prepend(txt);
 			});
 		}
 		function logout(){
