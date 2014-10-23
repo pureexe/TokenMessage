@@ -53,7 +53,7 @@
 						txt+="<tr><td><img src='https://graph.facebook.com/"+q.from.id+"/picture'></img></td><td>"+q.message+"</td><td>"+q.created_time+"</td></tr>";
 					}else {
 						FB.fql("SELECT attachment FROM message WHERE message_id='"+q.id+"'",function(r){
-							console.log(JSON.stringify(r.data);
+							console.log(JSON.stringify(r.data));
 							txt+="<tr><td><img src='https://graph.facebook.com/"+q.from.id+"/picture'></img></td><td>[image]</td><td>"+q.created_time+"</td></tr>";
 						})
 					}
