@@ -11,6 +11,7 @@
 	<script language="javascript">
 		var FB = new Facebook();
 		var tokenList =[];
+		var deleteMode = false;
 		function login(token){
 			sessionStorage.Token = token;
 			window.location.href="viewuser.html";
@@ -47,7 +48,18 @@
 			});
 		}
 		function toggle_delete(){
-		
+			if(!deleteMode){
+				token_deletemode = true; 
+				$(".tokenlink").css({'color':'#d9534f'});
+				$("#trashbutton").css({'color':'#d9534f'});
+				$("#trashbutton").addClass("fa-spin");
+				 $( ".tokenlink" ).parent().effect( "highlight","slow");
+			} else {
+				token_deletemode = false; 
+				$(".tokenlink").css({'color':'#428bca'});
+				$("#trashbutton").css({'color':'#428bca'});
+				$("#trashbutton").removeClass("fa-spin");
+			}
 		}
 		function pagemain(){
 			if(localStorage.TokenList&&JSON.parse(localStorage.TokenList).length>0){
@@ -56,7 +68,7 @@
 					FB.setAccessToken(q);
 					FB.api('/me?fields=id,name',function(res){
 						if(!res.error){
-							$("#token_table").append("<tr><td><a href='javascript:login(\""+res.access_token+"\")'><img src='https://graph.facebook.com/"+res.id+"/picture' class='img-responsive'  style='display: inline'></img> "+res.name+"</a></td></tr>");
+							$("#token_table").append("<tr><td><a href='javascript:login(\""+res.access_token+"\")' class='tokenlink'><img src='https://graph.facebook.com/"+res.id+"/picture' class='img-responsive'  style='display: inline'></img> "+res.name+"</a></td></tr>");
 							}
 					});
 				});
@@ -65,6 +77,22 @@
 			}
 		}
 		pagemain();
+		$(document).ready(function(){
+			$(".tokenlink").click(function(event){
+				event.preventDefault();
+				if(deleteMode){
+					$(this).parent().parent().fadeOut(400, function() { 
+						$(this).remove(); 
+						if($('#token_table tr').length==1){
+							$('#token_table').append("<tr><td colspan='2'>Not have any access token</td></tr>");
+						}
+					});
+				} else {
+					window.location = this.getAttribute("href");
+				}
+
+			});
+		});
 	</script>
 	</head>
 <body>
