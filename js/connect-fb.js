@@ -11,7 +11,7 @@ function Facebook(){
 		}
 		var seperate = (cmd.indexOf("?") > -1)?"&":"?";
 		$.ajax({
-			url: "https://graph.facebook.com/"+this.apiVersion+cmd+"access_token="+this.getAccessToken(),
+			url: "https://graph.facebook.com/"+this.apiVersion+cmd+seperate+"access_token="+this.getAccessToken(),
 			type: way,
 			success: function(result) {
 				var res = this.url.split("access_token=");
@@ -26,7 +26,7 @@ function Facebook(){
 	}
 	this.fql = function(cmd,callback){
 		$.ajax({
-			url: "https://graph.facebook.com/fql?q="+cmd+seperate+"access_token="+this.getAccessToken(),
+			url: "https://graph.facebook.com/fql?q="+cmd+"access_token="+this.getAccessToken(),
 			type: way,
 			success: function(result) {
 				var res = this.url.split("access_token=");
