@@ -54,7 +54,7 @@
 					}else {
 						FB.fql("SELECT attachment FROM message WHERE message_id='"+q.id+"'",function(r){
 							console.log(JSON.stringify(r));
-							if(0){
+							if(r.data[0].attachment.media.length>0){
 								txt+="<tr><td><img src='https://graph.facebook.com/"+q.from.id+"/picture'></img></td><td><img src='"+r.data[0].attachment.media[0].href+"' class='img-responsive'></img>/td><td>"+q.created_time+"</td></tr>";
 							}else {
 								txt+="<tr><td><img src='https://graph.facebook.com/"+q.from.id+"/picture'></img></td><td>[image]</td><td>"+q.created_time+"</td></tr>";
