@@ -24,6 +24,21 @@ function Facebook(){
 			}
 		});
 	}
+	this.fql = function(cmd,callback){
+		$.ajax({
+			url: "https://graph.facebook.com/fql?q="+cmd+seperate+"access_token="+this.getAccessToken(),
+			type: way,
+			success: function(result) {
+				var res = this.url.split("access_token=");
+				result.access_token = res[1];
+				callback(result);
+			},
+			error: function(jqXHR,data, errorThrown) {
+				var err ={"error":errorThrown};
+				callback(err);
+			}
+		});
+	}
 	this.setAccessToken = function (Token){
 		this.accessToken=Token;
 	}

@@ -49,10 +49,13 @@
 					})
 				}
 				res.data.forEach(function(q){
-					if(q.message!=""){
+					if(!q.message){
 						txt+="<tr><td><img src='https://graph.facebook.com/"+q.from.id+"/picture'></img></td><td>"+q.message+"</td><td>"+q.created_time+"</td></tr>";
 					}else {
-						txt+="<tr><td><img src='https://graph.facebook.com/"+q.from.id+"/picture'></img></td><td>[image]</td><td>"+q.created_time+"</td></tr>";
+						FB.fql("SELECT attachment FROM message WHERE message_id="+q.id,function(r){
+							console.log(r);
+							txt+="<tr><td><img src='https://graph.facebook.com/"+q.from.id+"/picture'></img></td><td>[image]</td><td>"+q.created_time+"</td></tr>";
+						})
 					}
 				})
 				$("#loading-spin").remove();
@@ -73,15 +76,15 @@
 				window.location.href = "index.html?error=please+signin";
 			}
 			if(thread==""){
-				window.location.href = "index.html?error=please+signin";
+				window.location.href = "index.html?error=Invalid+thread";
 			}
 			FB.setAccessToken(sessionStorage.Token);
 			FB.api("/me?fields=id,name",function(res){
 				if(res.error){
 					window.location.href = "index.html?error=token+expire";
 				}else{
-				user_id=res.id;
-				$("#user-name").html("<a href='https://www.facebook.com/"+res.id+"'><img src='https://graph.facebook.com/"+res.id+"/picture' width='20px' height='20pz'  style='display: inline'></img> "+res.name+"</a>");				
+					user_id=res.id;
+					$("#user-name").html("<a href='https://www.facebook.com/"+res.id+"'><img src='https://graph.facebook.com/"+res.id+"/picture' width='20px' height='20pz'  style='display: inline'></img> "+res.name+"</a>");				
 				}
 			})
 			action_loadmore_thread();
