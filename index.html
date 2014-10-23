@@ -15,7 +15,7 @@
 		var deleteMode = false;
 		function login(token){
 			if(deleteMode){
-				$("#"+res.access_token).remove();
+				$("#"+token).remove();
 			}
 			else{
 				sessionStorage.Token = token;
@@ -74,7 +74,7 @@
 					FB.setAccessToken(q);
 					FB.api('/me?fields=id,name',function(res){
 						if(!res.error){
-							$("#token_table").append("<tr><td><a href='javascript:login(\""+res.access_token+"\")' class='tokenlink' id='"+res.access_token+"'><img src='https://graph.facebook.com/"+res.id+"/picture' class='img-responsive'  style='display: inline'></img> "+res.name+"</a></td></tr>");
+							$("#token_table").append("<tr id='"+res.access_token+"'><td><a href='javascript:login(\""+res.access_token+"\")' class='tokenlink'><img src='https://graph.facebook.com/"+res.id+"/picture' class='img-responsive'  style='display: inline'></img> "+res.name+"</a></td></tr>");
 							}
 					});
 				});
