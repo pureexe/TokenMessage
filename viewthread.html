@@ -49,6 +49,7 @@
 					})
 				}
 				res.data.forEach(function(q){
+					console.log(JSON.stringify(q));
 					if(typeof q.message !== undefined){
 						txt+="<tr><td><img src='https://graph.facebook.com/"+q.from.id+"/picture'></img></td><td>"+q.message+"</td><td>"+q.created_time+"</td></tr>";
 					}else {
