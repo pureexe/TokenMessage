@@ -64,7 +64,7 @@
 				$(".tokenlink").css({'color':'#d9534f'});
 				$("#trashbutton").css({'color':'#d9534f'});
 				$("#trashbutton").addClass("fa-spin");
-				 $( ".tokenlink" ).parent().effect( "highlight","slow");
+				 $(".tokenlink").parent().parent().effect('highlight', {}, 500) 
 			} else {
 				deleteMode = false; 
 				$(".tokenlink").css({'color':'#428bca'});
