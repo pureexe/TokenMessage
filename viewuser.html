@@ -1,11 +1,11 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/growl-animate.min.css">
+	<link rel="stylesheet" href="css/growl-animate.min.css">
 	<script src="js/connect-fb.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<script src="js/bootstrap-growl.min.js"></script>
 	<style>
@@ -39,19 +39,19 @@
 						txt+="<tr><td><i class='fa fa-user fa-3x'></i></td><td>Facebook User</td><td>"+q.updated_time+"</td>";
 					}else if(q.to.data.length==2){
 						if(q.to.data[0].id!=user_id){
-							txt+="<tr><td><img src='https://graph.facebook.com/"+q.to.data[0].id+"/picture' class='img-responsive'></td><td>"+q.to.data[0].name+"</td><td>"+q.updated_time+"</td>";
+							txt+="<tr><td><img src='https://graph.facebook.com/"+q.to.data[0].id+"/picture' class='img-responsive'></td><td><a href='viewthread.html?id="+q.id+"'>"+q.to.data[0].name+"</a></td><td>"+q.updated_time+"</td>";
 						}else{
-							txt+="<tr><td><img src='https://graph.facebook.com/"+q.to.data[1].id+"/picture' class='img-responsive'></td><td>"+q.to.data[1].name+"</td><td>"+q.updated_time+"</td>";						
+							txt+="<tr><td><img src='https://graph.facebook.com/"+q.to.data[1].id+"/picture' class='img-responsive'></td><td><a href='viewthread.html?id="+q.id+"'>"+q.to.data[1].name+"</a></td><td>"+q.updated_time+"</td>";						
 						}
 					}else {
-						txt+="<tr><td><i class='fa fa-users fa-3x'></i></td><td>";
+						txt+="<tr><td><i class='fa fa-users fa-3x'></i></td><td><a href='viewthread.html?id="+q.id+"'>";
 						q.to.data.forEach(function(r){
 							if(r.id!=user_id){
 								txt+=r.name+", ";
 							}
 						});
 						txt = txt.substring(0, txt.length - 2);
-						txt+="</td><td>"+q.updated_time+"</td>";
+						txt+="</a></td><td>"+q.updated_time+"</td>";
 					}
 				})
 				if(typeof res.paging  !== 'undefined' &&typeof res.paging.next  !== 'undefined'){
