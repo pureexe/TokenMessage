@@ -16,6 +16,7 @@
 	<script language="javascript">
 		var FB = new Facebook();
 		var user_id = "";
+		var thread ="";
 		function getURL(name, url) {
             if (!url) {
                 url = window.location.href;
@@ -26,11 +27,11 @@
             }
             return results[1] || 0;
         }
-		function action_loadmore_user(until){
+		function action_loadmore_thread(until){
 			$("#loadmore-txt").remove();
-			$("#user-display").append("<tr id='loading-spin'><td></td><td><center><i class='fa fa-refresh fa-spin'></i></center></td><td></td></tr>");
+			$("#thread-display").append("<tr id='loading-spin'><td></td><td><center><i class='fa fa-refresh fa-spin'></i></center></td><td></td></tr>");
 			until = (until)?until:"";
-			FB.api("/me/inbox?fields=id,to&limit=25&until="+until,function(res){
+			FB.api("/"+thread+"?fields=id,to&limit=25&until="+until,function(res){
 				var txt="";
 				res.data.forEach(function(q){
 					if(q.to.data.length==1){
@@ -68,7 +69,7 @@
 					})
 				}
 				$("#loading-spin").remove();
-				$("#user-display").append(txt);
+				$("#thread-display").append(txt);
 			});
 		}
 		function logout(){
@@ -76,12 +77,16 @@
 			window.location.href = "index.html";
 		}
 		function pagemain(){
-			var token = getURL("token");
-			if(token){
-				sessionStorage.Token = token;
+			var ctoken = getURL("token");
+			var thread = getURL("id");
+			if(ctoken){
+				sessionStorage.Token = ctoken;
 			}
 			if(!sessionStorage.Token){
-				window.location.href = "index.html";
+				window.location.href = "index.html?error=please+signin";
+			}
+			if(thread==""){
+				window.location.href = "index.html?error=please+signin";
 			}
 			FB.setAccessToken(sessionStorage.Token);
 			FB.api("/me?fields=id,name",function(res){
@@ -92,7 +97,7 @@
 				$("#user-name").html("<a href='https://www.facebook.com/"+res.id+"'><img src='https://graph.facebook.com/"+res.id+"/picture' width='20px' height='20pz'  style='display: inline'></img> "+res.name+"</a>");				
 				}
 			})
-			action_loadmore_user();
+			action_loadmore_thread();
 		}
 		pagemain();
 	</script>
@@ -123,10 +128,10 @@
 			<table class="table table-hover col-md-6">
 				<thead>
 					<th class="col-md-1">Picture</th>
-					<th class="col-md-9">Contact</th>
+					<th class="col-md-9">Message</th>
 					<th class="col-md-2">Date</th>
 				</thead>
-				<tbody id="user-display">
+				<tbody id="thread-display">
 				</tbody>
 			</table>
 		</table>
