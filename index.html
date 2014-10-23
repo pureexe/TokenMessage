@@ -14,6 +14,7 @@
 		var deleteMode = false;
 		function login(token){
 			if(deleteMode){
+				// need implement delete algorithm
 				$("#row-"+token).fadeOut(400, function() { 
 					$(this).remove(); 
 					if($('#token_table tr').length==0){
