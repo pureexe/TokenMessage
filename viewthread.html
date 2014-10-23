@@ -41,7 +41,7 @@
 					}
 				})
 				if(typeof res.paging  !== 'undefined' &&typeof res.paging.next  !== 'undefined'){
-					txt+="<tr id='loadmore-txt'><td></td><td><a href=\"javascript:action_loadmore_user('"+getURL("until",res.paging.next)+"&__paging_token="+getURL("__paging_token",res.paging.next)+"')\"><i class='fa fa-history'></i> Load more</a></td><td></td></tr></tr>";
+					txt+="<tr id='loadmore-txt'><td></td><td><a href=\"javascript:action_loadmore_thread('"+getURL("until",res.paging.next)+"&__paging_token="+getURL("__paging_token",res.paging.next)+"')\"><i class='fa fa-history'></i> Load more</a></td><td></td></tr></tr>";
 				} else {
 					$.growl({
 						message: '<b>All</b> chat have been loaded!'
