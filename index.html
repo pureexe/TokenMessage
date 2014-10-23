@@ -1,16 +1,20 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/growl-animate.min.css">
+	<link rel="stylesheet" href="css/growl-animate.min.css">
 	<script src="js/connect-fb.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 	<script src="js/bootstrap-growl.min.js"></script>
 	<script language="javascript">
 		var FB = new Facebook();
 		var tokenList =[];
+		function login(token){
+			sessionStorage.Token = token;
+			window.location.href="viewuser.html";
+		}
 		function loadaccessToken(){
 			var access_token = $("#access_token").val();
 			FB.setAccessToken(access_token);
@@ -38,7 +42,7 @@
 						tokenList.push(access_token);
 						localStorage.TokenList = JSON.stringify(tokenList);
 					} 
-					window.location.href="viewuser.html?token="+access_token;
+					login(access_token);
 				}
 			});
 		}
