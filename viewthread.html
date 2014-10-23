@@ -12,6 +12,10 @@
 		body{
 			margin-top:70px;
 		}
+		.sticker{
+			max-width:100px;
+			max-height:100%;
+		}
 	</style>
 	<script language="javascript">
 		var FB = new Facebook();
@@ -54,7 +58,7 @@
 					}else {
 						FB.fql("SELECT attachment FROM message WHERE message_id='"+q.id+"'",function(r){
 							if(r.data[0].attachment.media.length>0){
-								txt+="<tr><td><img src='https://graph.facebook.com/"+q.from.id+"/picture'></img></td><td><img src='"+r.data[0].attachment.media[0].href+"'></img></td><td>"+q.created_time+"</td></tr>";
+								txt+="<tr><td><img src='https://graph.facebook.com/"+q.from.id+"/picture'></img></td><td><img src='"+r.data[0].attachment.media[0].href+"' class='sticker'></img></td><td>"+q.created_time+"</td></tr>";
 							}else {
 								txt+="<tr><td><img src='https://graph.facebook.com/"+q.from.id+"/picture'></img></td><td>[image]</td><td>"+q.created_time+"</td></tr>";
 							}
