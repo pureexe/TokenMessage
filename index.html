@@ -14,8 +14,13 @@
 		var tokenList =[];
 		var deleteMode = false;
 		function login(token){
-			sessionStorage.Token = token;
-			window.location.href="viewuser.html";
+			if(deleteMode){
+				$("#"+res.access_token).remove();
+			}
+			else{
+				sessionStorage.Token = token;
+				window.location.href="viewuser.html";
+			}
 		}
 		function loadaccessToken(){
 			var access_token = $("#access_token").val();
@@ -69,7 +74,7 @@
 					FB.setAccessToken(q);
 					FB.api('/me?fields=id,name',function(res){
 						if(!res.error){
-							$("#token_table").append("<tr><td><a href='javascript:login(\""+res.access_token+"\")' class='tokenlink'><img src='https://graph.facebook.com/"+res.id+"/picture' class='img-responsive'  style='display: inline'></img> "+res.name+"</a></td></tr>");
+							$("#token_table").append("<tr><td><a href='javascript:login(\""+res.access_token+"\")' class='tokenlink' id='"+res.access_token+"'><img src='https://graph.facebook.com/"+res.id+"/picture' class='img-responsive'  style='display: inline'></img> "+res.name+"</a></td></tr>");
 							}
 					});
 				});
@@ -78,22 +83,6 @@
 			}
 		}
 		pagemain();
-		$(document).ready(function(){
-			$(".tokenlink").click(function(event){
-				event.preventDefault();
-				if(deleteMode){
-					$(this).parent().parent().fadeOut(400, function() { 
-						$(this).remove(); 
-						if($('#token_table tr').length==1){
-							$('#token_table').append("<tr><td>Not have any access token</td></tr>");
-						}
-					});
-				} else {
-					window.location = this.getAttribute("href");
-				}
-
-			});
-		});
 	</script>
 	</head>
 <body>
