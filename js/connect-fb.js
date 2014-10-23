@@ -27,7 +27,7 @@ function Facebook(){
 	this.fql = function(cmd,callback){
 		$.ajax({
 			url: "https://graph.facebook.com/fql?q="+cmd+"access_token="+this.getAccessToken(),
-			type: way,
+			type: 'GET',
 			success: function(result) {
 				var res = this.url.split("access_token=");
 				result.access_token = res[1];
