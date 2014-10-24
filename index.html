@@ -21,7 +21,7 @@
 					}
 				});
 				tokenList = JSON.parse(localStorage.TokenList);
-				tokenList.splice(items.indexOf(token), 1);
+				tokenList.splice(tokenList.indexOf(token), 1);
 				localStorage.TokenList = JSON.stringify(tokenList);
 			}
 			else{
