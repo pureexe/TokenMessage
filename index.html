@@ -14,13 +14,15 @@
 		var deleteMode = false;
 		function login(token){
 			if(deleteMode){
-				// need implement delete algorithm
 				$("#row-"+token).fadeOut(400, function() { 
 					$(this).remove(); 
 					if($('#token_table tr').length==0){
 						$('#token_table').append("<tr><td >Not have any access token</td></tr>");
 					}
 				});
+				tokenList = JSON.parse(localStorage.TokenList);
+				tokenList.splice(items.indexOf(token), 1);
+				localStorage.TokenList = JSON.stringify(tokenList);
 			}
 			else{
 				sessionStorage.Token = token;
