@@ -32,8 +32,7 @@
 		}
 		function display_date(date_str){
 			mdate = dateFromString(date_str);
-			mdate.setTime(mdate.getTime()+mdate.getTimezoneOffset()*60*1000 );
-			console.log(mdate.getTimezoneOffset());
+			mdate.setTime(mdate.getTime()-mdate.getTimezoneOffset()*60*1000 );
 			return mdate.getDay()+"/"+mdate.getMonth()+"/"+mdate.getFullYear()+"<br>"+mdate.getHours()+":"+mdate.getMinutes();
 		}
 		function action_loadmore_user(until){
