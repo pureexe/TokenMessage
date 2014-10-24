@@ -91,21 +91,26 @@
 		pagemain();
 	</script>
 	<style>
-	#wrap {
-		min-height: 100%;
-		height: auto;
-		margin: 0 auto -60px;
-		padding: 0 0 60px;
-	}
-
-	#footer {
-		height: 60px;
-	}
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}
 	</style>
 	</head>
 <body>
 
-<div class="container" id="wrap">
 <nav class="navbar navbar-default navbar-static-top" role="navigation">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -122,7 +127,7 @@
 	</div>
 	</div>
  </nav>
-
+<div class="container" id="wrap">
 		<div class="col-md-6">
 			<form class="form-signin" role="form" action="">
 				<h2 class="form-signin-heading">Please sign in with access token.</h2>
@@ -142,10 +147,10 @@
 			</table>
         </div>
 </div>
-<div id="footer">
+ <footer>
       <div class="container">
-			Develop by <a href="https://www.github.com/pureexe">Pakkapon Phongthawee</a>
+        <p class="text-muted">Place sticky footer content here.</p>
       </div>
-</div>
+    </footer>
 </body>
 </html>
