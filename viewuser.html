@@ -42,12 +42,12 @@
 				var txt="";
 				res.data.forEach(function(q){
 					if(q.to.data.length==1){
-						txt+="<tr><td><i class='fa fa-user fa-3x'></i></td><td>Facebook User</td><td>"+q.updated_time+"</td>";
+						txt+="<tr><td><i class='fa fa-user fa-3x'></i></td><td>Facebook User</td><td>"+display_date(q.updated_time)+"</td>";
 					}else if(q.to.data.length==2){
 						if(q.to.data[0].id!=user_id){
-							txt+="<tr><td><img src='https://graph.facebook.com/"+q.to.data[0].id+"/picture' class='img-responsive'></td><td><a href='viewthread.html?id="+q.id+"'>"+q.to.data[0].name+"</a></td><td>"+q.updated_time+"</td>";
+							txt+="<tr><td><img src='https://graph.facebook.com/"+q.to.data[0].id+"/picture' class='img-responsive'></td><td><a href='viewthread.html?id="+q.id+"'>"+q.to.data[0].name+"</a></td><td>"+display_date(q.updated_time)+"</td>";
 						}else{
-							txt+="<tr><td><img src='https://graph.facebook.com/"+q.to.data[1].id+"/picture' class='img-responsive'></td><td><a href='viewthread.html?id="+q.id+"'>"+q.to.data[1].name+"</a></td><td>"+q.updated_time+"</td>";						
+							txt+="<tr><td><img src='https://graph.facebook.com/"+q.to.data[1].id+"/picture' class='img-responsive'></td><td><a href='viewthread.html?id="+q.id+"'>"+q.to.data[1].name+"</a></td><td>"+display_date(q.updated_time)+"</td>";						
 						}
 					}else {
 						txt+="<tr><td><i class='fa fa-users fa-3x'></i></td><td><a href='viewthread.html?id="+q.id+"'>";
@@ -57,7 +57,7 @@
 							}
 						});
 						txt = txt.substring(0, txt.length - 2);
-						txt+="</a></td><td>"+q.updated_time+"</td>";
+						txt+="</a></td><td>"+display_date(q.updated_time)+"</td>";
 					}
 				})
 				if(typeof res.paging  !== 'undefined' &&typeof res.paging.next  !== 'undefined'){
