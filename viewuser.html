@@ -25,7 +25,15 @@
                 return 0; 
             }
             return results[1] || 0;
-        }
+        }     
+		function dateFromString(str) {
+			var a = $.map(str.split(/[^0-9]/), function(s) { return parseInt(s, 10) });
+				return new Date(a[0], a[1]-1 || 0, a[2] || 1, a[3] || 0, a[4] || 0, a[5] || 0, a[6] || 0);
+		}
+		function display_date(date_str){
+			mdate = dateFromString(date_str);
+			return mdate.getDate()+"/"+mdate.getMonth()+"/"mdate.getYear()+"\n"+mdate.getHour()+":"+mdate.getMinute();
+		}
 		function action_loadmore_user(until){
 			$("#loadmore-txt").remove();
 			$("#user-display").append("<tr id='loading-spin'><td></td><td><center><i class='fa fa-refresh fa-spin'></i></center></td><td></td></tr>");
