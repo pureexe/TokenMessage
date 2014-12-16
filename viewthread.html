@@ -34,12 +34,13 @@
 		function display_date(date_str){
 			function dateFromString(str) {
 				var a = $.map(str.split(/[^0-9]/), function(s) { return parseInt(s, 10) });
+          
 				return new Date(a[0], a[1]-1 || 0, a[2] || 1, a[3] || 0, a[4] || 0, a[5] || 0, a[6] || 0);
 			}
 			function pad(n){return n<10 ? '0'+n : n}
 			mdate = dateFromString(date_str);
 			mdate.setTime(mdate.getTime()-mdate.getTimezoneOffset()*60*1000 );
-			return mdate.getDay()+"/"+mdate.getMonth()+"/"+mdate.getFullYear()+"<br>"+pad(mdate.getHours())+":"+pad(mdate.getMinutes());
+			return mdate.getDate()+"/"+(mdate.getMonth()+1)+"/"+mdate.getFullYear()+"<br>"+pad(mdate.getHours())+":"+pad(mdate.getMinutes());
 		}
 		function action_loadmore_thread(until){
 			$("#loadmore-txt").remove();
