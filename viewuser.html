@@ -43,6 +43,7 @@
 			FB.api("/me/inbox?fields=id,to&limit=25&until="+until,function(res){
 				var txt="";
 				res.data.forEach(function(q){
+					console.log(q); // test debug
 					if(q.to.data.length==1){
 						txt+="<tr><td><i class='fa fa-user fa-3x'></i></td><td>Facebook User</td><td style='text-align: right;'>"+display_date(q.updated_time)+"</td>";
 					}else if(q.to.data.length==2){
