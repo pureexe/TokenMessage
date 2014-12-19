@@ -67,15 +67,13 @@
 					if(typeof q.message != 'undefined'){
 						txt+="<tr><td><img src='https://graph.facebook.com/"+q.from.id+"/picture' class='img-responsive'></img></td><td>"+q.message+"</td><td style='text-align: right;'>"+display_date(q.created_time)+"</td></tr>";
 					}else {
-						/*
 						FB.fql("SELECT attachment FROM message WHERE message_id='"+q.id+"'",function(r){
 							if(r.data[0].attachment.media.length>0){
 								txt+="<tr><td><img src='https://graph.facebook.com/"+q.from.id+"/picture'></img></td><td><img src='"+r.data[0].attachment.media[0].href+"' class='sticker'></img></td><td style='text-align: right;'>"+display_date(q.created_time)+"</td></tr>";
 							}else {
 								txt+="<tr><td><img src='https://graph.facebook.com/"+q.from.id+"/picture'></img></td><td>[image]</td><td style='text-align: right;'>"+display_date(q.created_time)+"</td></tr>";
 							}
-						})*/
-						txt+="<tr><td><img src='https://graph.facebook.com/"+q.from.id+"/picture'></img></td><td><a href='"+q.attachments.data[0].url+"'><img src='"+q.attachments.data[0].preview_url+"' class='sticker'></img></a></td><td style='text-align: right;'>"+display_date(q.created_time)+"</td></tr>";
+						})
 					}
 				})
 				$("#loading-spin").remove();
