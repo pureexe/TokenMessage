@@ -2,7 +2,7 @@
 Facebook class use Communicate with facebook like you using with Facebook Javascript SDK
 ****/
 function Facebook(){
-	this.apiVersion = "v2.1";
+	this.apiVersion = "v2.0";
 	this.accessToken = "";
 	this.api = function(cmd,way,callback){
 		if(typeof callback === "undefined"){
