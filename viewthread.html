@@ -74,7 +74,11 @@
 						txt+="<tr><td><img src='https://graph.facebook.com/"+q.from.id+"/picture' class='img-responsive'></img></td><td>"+q.message+"</td><td style='text-align: right;'>"+display_date(q.created_time)+"</td></tr>";
 					}else {
                         if(q.attachments){
-                        	txt+="<tr><td><img src='https://graph.facebook.com/"+q.from.id+"/picture' class='img-responsive'></img></td><td><a href='"+q.attachments.data[0].image_data.url+"'><img src='"+q.attachments.data[0].image_data.preview_url+"'></img></a></td><td style='text-align: right;'>"+display_date(q.created_time)+"</td></tr>";
+                            if(q.attachments.data[0].image_data){
+                                txt+="<tr><td><img src='https://graph.facebook.com/"+q.from.id+"/picture' class='img-responsive'></img></td><td><a href='"+q.attachments.data[0].image_data.url+"'><img src='"+q.attachments.data[0].image_data.preview_url+"'></img></a></td><td style='text-align: right;'>"+display_date(q.created_time)+"</td></tr>";
+                            }else{
+                               txt+="<tr><td><img src='https://graph.facebook.com/"+q.from.id+"/picture' class='img-responsive'></img></td><td><a href='https://api.facebook.com/method/messaging.getAttachment?access_token="+FB.getAccessToken()+"&mid="+q.id+"&aid="+q.attachments.data[0].id+"&format=binary'>"+q.attachments.data[0].name+"("+q.attachments.data[0].size+" byte)</a></td><td style='text-align: right;'>"+display_date(q.created_time)+"</td></tr>"; 
+                            }
                         }else if(q.shares){
 
                             	txt+="<tr><td><img src='https://graph.facebook.com/"+q.from.id+"/picture' class='img-responsive'></img></td><td><img src='"+q.shares.data[0].link+"'></img></td><td style='text-align: right;'>"+display_date(q.created_time)+"</td></tr>";
