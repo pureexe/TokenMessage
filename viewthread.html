@@ -48,7 +48,7 @@
             until=(until)?until:"";
             FB.api("/"+thread+"/messages?fields=id,attachments,from,shares,message&limit=25&until="+until+"",function(res){
 				var txt="";
-                if(!until){
+                if(res.messages){
                     res = res.messages;
                 }
                 if(res.data){
