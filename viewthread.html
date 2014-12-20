@@ -45,7 +45,7 @@
 		function action_loadmore_thread(until){
 			$("#loadmore-txt").remove();
 			$("#thread-display").prepend("<tr id='loading-spin'><td></td><td><center><i class='fa fa-refresh fa-spin'></i></center></td><td></td></tr>");
-            var untilstr=(!until)?"/"+thread+"?fields=messages&limit=25":"/"+thread+"/messages?limit=25&until="+until+"";
+            var untilstr=(!until)?"/"+thread+"?fields=messages&limit=25":"/"+thread+"/messages?fields=id,attachments,from,shares,message&limit=25&until="+until+"";
     		FB.api(untilstr,function(res){
 				var txt="";
                 if(!until){

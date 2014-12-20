@@ -10,7 +10,7 @@ function Facebook(){
 			return ;
 		}
 		var seperate = (cmd.indexOf("?") > -1)?"&":"?";
-		$.ajax({
+        $.ajax({
 			url: "https://graph.facebook.com/"+this.apiVersion+cmd+seperate+"access_token="+this.getAccessToken(),
 			type: way,
 			success: function(result) {
