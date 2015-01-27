@@ -44,7 +44,7 @@
 				var txt="";
 				res.data.forEach(function(q){
 					if(!q.participants||q.participants.data.length==1){
-						txt+="<tr><td><i class='fa fa-user fa-3x'></i></td><td>Facebook User</td><td style='text-align: right;'>"+display_date(q.updated_time)+"</td>";
+						txt+="<tr><td><i class='fa fa-user fa-3x'></i></td><td><a href='viewthread.html?id="+q.id+"'>Facebook User</a></td><td style='text-align: right;'>"+display_date(q.updated_time)+"</td>";
 					}else if(q.participants.data.length==2){
 						if(q.participants.data[0].id!=user_id){
 							txt+="<tr><td><img src='https://graph.facebook.com/"+q.participants.data[0].id+"/picture' class='img-responsive'></td><td><a href='viewthread.html?id="+q.id+"'>"+q.participants.data[0].name+"</a></td><td style='text-align: right;'>"+display_date(q.updated_time)+"</td>";
