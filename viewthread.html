@@ -26,15 +26,15 @@
                 url = window.location.href;
             }
             var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(url);
-            if (!results) { 
-                return 0; 
+            if (!results) {
+                return 0;
             }
             return results[1] || 0;
         }
 		function display_date(date_str){
 			function dateFromString(str) {
 				var a = $.map(str.split(/[^0-9]/), function(s) { return parseInt(s, 10) });
-          
+
 				return new Date(a[0], a[1]-1 || 0, a[2] || 1, a[3] || 0, a[4] || 0, a[5] || 0, a[6] || 0);
 			}
 			function pad(n){return n<10 ? '0'+n : n}
@@ -42,11 +42,11 @@
 			mdate.setTime(mdate.getTime()-mdate.getTimezoneOffset()*60*1000 );
 			return mdate.getDate()+"/"+(mdate.getMonth()+1)+"/"+mdate.getFullYear()+"<br>"+pad(mdate.getHours())+":"+pad(mdate.getMinutes());
 		}
-		function action_loadmore_thread(until){
+		function action_loadmore_thread(after){
 			$("#loadmore-txt").remove();
 			$("#thread-display").prepend("<tr id='loading-spin'><td></td><td><center><i class='fa fa-refresh fa-spin'></i></center></td><td></td></tr>");
-            until=(until)?until:"";
-            FB.api("/"+thread+"/messages?fields=id,attachments,from,shares,message&limit=25&until="+until+"",function(res){
+            after=(after)?after:"";
+            FB.api("/"+thread+"/messages?fields=id,attachments,from,shares,message&limit=25&after="+after+"",function(res){
 				var txt="";
                 if(res.messages){
                     res = res.messages;
@@ -55,7 +55,7 @@
                     res.data.reverse();
                 }
 				if(typeof res.paging  !== 'undefined' &&typeof res.paging.next  !== 'undefined'){
-					txt+="<tr id='loadmore-txt'><td></td><td><a href=\"javascript:action_loadmore_thread('"+getURL("until",res.paging.next)+"&__paging_token="+getURL("__paging_token",res.paging.next)+"')\"><i class='fa fa-history'></i> Load more</a></td><td></td></tr></tr>";
+					txt+="<tr id='loadmore-txt'><td></td><td><a href=\"javascript:action_loadmore_thread('"+getURL("after",res.paging.next)+"')\"><i class='fa fa-history'></i> Load more</a></td><td></td></tr></tr>";
 				} else {
 					$.growl({
 						message: '<b>All</b> chat have been loaded!'
@@ -77,7 +77,7 @@
                             if(q.attachments.data[0].image_data){
                                 txt+="<tr><td><img src='https://graph.facebook.com/"+q.from.id+"/picture' class='img-responsive'></img></td><td><a href='"+q.attachments.data[0].image_data.url+"' target='_blank'><img src='"+q.attachments.data[0].image_data.preview_url+"' class='img-responsive'></img></a></td><td style='text-align: right;'>"+display_date(q.created_time)+"</td></tr>";
                             }else{
-                               txt+="<tr><td><img src='https://graph.facebook.com/"+q.from.id+"/picture' class='img-responsive'></img></td><td><a href='https://api.facebook.com/method/messaging.getAttachment?access_token="+FB.getAccessToken()+"&mid="+q.id+"&aid="+q.attachments.data[0].id+"&format=binary' target='_blank'>"+q.attachments.data[0].name+"("+q.attachments.data[0].size+" byte)</a></td><td style='text-align: right;'>"+display_date(q.created_time)+"</td></tr>"; 
+                               txt+="<tr><td><img src='https://graph.facebook.com/"+q.from.id+"/picture' class='img-responsive'></img></td><td><a href='https://api.facebook.com/method/messaging.getAttachment?access_token="+FB.getAccessToken()+"&mid="+q.id+"&aid="+q.attachments.data[0].id+"&format=binary' target='_blank'>"+q.attachments.data[0].name+"("+q.attachments.data[0].size+" byte)</a></td><td style='text-align: right;'>"+display_date(q.created_time)+"</td></tr>";
                             }
                         }else if(q.shares){
 
@@ -111,7 +111,7 @@
 					window.location.href = "index.html?error=token+expire";
 				}else{
 					user_id=res.id;
-					$("#user-name").html("<a href='https://www.facebook.com/"+res.id+"'><img src='https://graph.facebook.com/"+res.id+"/picture' width='20px' height='20pz'  style='display: inline'></img> "+res.name+"</a>");				
+					$("#user-name").html("<a href='https://www.facebook.com/"+res.id+"'><img src='https://graph.facebook.com/"+res.id+"/picture' width='20px' height='20pz'  style='display: inline'></img> "+res.name+"</a>");
 				}
 			})
 			action_loadmore_thread();
